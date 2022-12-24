@@ -1,0 +1,28 @@
+﻿
+Microsoft Visual Studio Solution File, Format Version 12.00
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "StrengthReduction", "StrengthReduction\StrengthReduction.csproj", "{A0379643-CEC5-4F76-AFAB-4C28E89A2CC7}"
+EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "StrengthReductionBencher", "StrengthReductionBencher\StrengthReductionBencher.csproj", "{AA3E78DF-7541-4A18-8004-F3CCE01FA9AF}"
+EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "StrengthReductionTest", "StrengthReductionTest\StrengthReductionTest.csproj", "{AB9CF643-BB0B-40B9-BE4A-5039F83AE953}"
+EndProject
+Global
+	GlobalSection(SolutionConfigurationPlatforms) = preSolution
+		Debug|Any CPU = Debug|Any CPU
+		Release|Any CPU = Release|Any CPU
+	EndGlobalSection
+	GlobalSection(ProjectConfigurationPlatforms) = postSolution
+		{A0379643-CEC5-4F76-AFAB-4C28E89A2CC7}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{A0379643-CEC5-4F76-AFAB-4C28E89A2CC7}.Release|Any CPU.Build.0 = Release|Any CPU
+		{A0379643-CEC5-4F76-AFAB-4C28E89A2CC7}.Debug|Any CPU.ActiveCfg = Release|Any CPU
+		{A0379643-CEC5-4F76-AFAB-4C28E89A2CC7}.Debug|Any CPU.Build.0 = Release|Any CPU
+		{AA3E78DF-7541-4A18-8004-F3CCE01FA9AF}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{AA3E78DF-7541-4A18-8004-F3CCE01FA9AF}.Release|Any CPU.Build.0 = Release|Any CPU
+		{AA3E78DF-7541-4A18-8004-F3CCE01FA9AF}.Debug|Any CPU.ActiveCfg = Release|Any CPU
+		{AA3E78DF-7541-4A18-8004-F3CCE01FA9AF}.Debug|Any CPU.Build.0 = Release|Any CPU
+		{AB9CF643-BB0B-40B9-BE4A-5039F83AE953}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{AB9CF643-BB0B-40B9-BE4A-5039F83AE953}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{AB9CF643-BB0B-40B9-BE4A-5039F83AE953}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{AB9CF643-BB0B-40B9-BE4A-5039F83AE953}.Release|Any CPU.Build.0 = Release|Any CPU
+	EndGlobalSection
+EndGlobal
