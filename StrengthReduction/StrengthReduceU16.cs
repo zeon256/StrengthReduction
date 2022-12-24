@@ -18,7 +18,7 @@ public readonly struct StrengthReduceU16
         }
         else
         {
-            var divided = (uint.MaxValue / divisor);
+            var divided = uint.MaxValue / divisor;
             _multiplier = ++divided;
         }
 

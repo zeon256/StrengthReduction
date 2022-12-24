@@ -35,7 +35,7 @@ public class StrengthReduceTest
             }
         }
     }
-    
+
     [Test]
     public void TestUShort()
     {
@@ -60,7 +60,7 @@ public class StrengthReduceTest
             }
         }
     }
-    
+
     [Test]
     public void TestU32()
     {
@@ -85,7 +85,7 @@ public class StrengthReduceTest
             }
         }
     }
-    
+
     [Test]
     public void TestU64()
     {

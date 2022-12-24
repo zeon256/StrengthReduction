@@ -18,7 +18,7 @@ public readonly struct StrengthReduceU32
         }
         else
         {
-            var divided = (ulong.MaxValue / divisor);
+            var divided = ulong.MaxValue / divisor;
             _multiplier = ++divided;
         }
 
@@ -38,10 +38,10 @@ public readonly struct StrengthReduceU32
     [MethodImpl(MethodImplOptions.AggressiveInlining)]
     public static uint operator %(uint a, StrengthReduceU32 rhs)
     {
-        if (rhs._multiplier == 0) return (a & (rhs._divisor - 1));
+        if (rhs._multiplier == 0) return a & (rhs._divisor - 1);
 
         var quotient = a / rhs;
-        return (a - quotient * rhs._divisor);
+        return a - quotient * rhs._divisor;
     }
 
     [MethodImpl(MethodImplOptions.AggressiveInlining)]
