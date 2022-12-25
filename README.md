@@ -15,24 +15,25 @@ Modern processors can do multiplication and shifts much faster than division, an
 
 
 ## Example usage
-> Works the best when there is repeated division of the same divisor
+> Works the best when there is repeated division of the same divisor. For more example see `StrengthReductionTest` folder
 ```csharp
-public void TestUShort()
+    [Test]
+    public void TestByte()
     {
-        const ushort max = ushort.MaxValue;
-        ushort[] divisors = { 1, 2, 3, 4, 5, 6, 7, 8, 9, 10, 11, 12, 13, 14, 15, 16, 17, 18, 19, 20, max - 1, max };
-        ushort[] numerators = { 0, 1, 2, 3, 4, 5, 6, 7, 8, 9, 10, 11, 12, 13, 14, 15, 16, 17, 18, 19, 20 };
+        const byte max = byte.MaxValue;
+        byte[] divisors = { 1, 2, 3, 4, 5, 6, 7, 8, 9, 10, 11, 12, 13, 14, 15, 16, 17, 18, 19, 20, max - 1, max };
+        byte[] numerators = { 0, 1, 2, 3, 4, 5, 6, 7, 8, 9, 10, 11, 12, 13, 14, 15, 16, 17, 18, 19, 20 };
         foreach (var divisor in divisors)
         {
-            var reduced = new StrengthReduceU16(divisor);
+            var reduced = new StrengthReduceU8(divisor);
             foreach (var numerator in numerators)
             {
                 Console.WriteLine($"Testing {numerator} / {divisor}");
-                var expectedDiv = (ushort)(numerator / divisor);
-                var expectedRem = (ushort)(numerator % divisor);
+                var expectedDiv = (byte)(numerator / divisor);
+                var expectedRem = (byte)(numerator % divisor);
                 var reducedDiv = numerator / reduced;
                 var reducedRem = numerator % reduced;
-                var (reducedCombinedDiv, reducedCombinedRem) = StrengthReduceU16.DivRem(numerator, reduced);
+                var (reducedCombinedDiv, reducedCombinedRem) = StrengthReduceU8.DivRem(numerator, reduced);
                 Assert.AreEqual(expectedDiv, reducedDiv);
                 Assert.AreEqual(expectedRem, reducedRem);
                 Assert.AreEqual(expectedDiv, reducedCombinedDiv);
@@ -43,21 +44,22 @@ public void TestUShort()
 ```
 
 ## Benchmarks
+> Benchmark ran with BenchmarkDotNet
 |                         Method |         Mean |      Error |     StdDev |
 |------------------------------- |-------------:|-----------:|-----------:|
-| BenchStrengthReduceByteOneByte |     2.822 ns |  0.0236 ns |  0.0220 ns |
-|   BenchStrengthReduceU16OneU16 |     3.776 ns |  0.0288 ns |  0.0270 ns |
-|            BenchBaselineOneU32 |     5.155 ns |  0.0383 ns |  0.0358 ns |
-|            BenchBaselineOneU64 |     5.275 ns |  0.0221 ns |  0.0206 ns |
-|           BenchBaselineOneByte |     5.283 ns |  0.0420 ns |  0.0393 ns |
-|            BenchBaselineOneU16 |     5.289 ns |  0.0321 ns |  0.0300 ns |
-|   BenchStrengthReduceU32OneU32 |     5.775 ns |  0.0238 ns |  0.0223 ns |
-|   BenchStrengthReduceU64OneU64 |    72.487 ns |  1.1491 ns |  1.0748 ns |
-|        BenchStrengthReduceByte |   169.297 ns |  2.4841 ns |  2.2021 ns |
-|         BenchStrengthReduceU16 |   211.737 ns |  1.9675 ns |  1.8404 ns |
-|         BenchStrengthReduceU32 |   238.931 ns |  3.0642 ns |  2.8662 ns |
-|         BenchStrengthReduceU64 | 1,723.710 ns | 13.8923 ns | 12.3152 ns |
-|               BenchBaselineU64 | 3,137.604 ns |  8.6419 ns |  8.0836 ns |
-|              BenchBaselineByte | 3,187.400 ns | 36.5770 ns | 34.2142 ns |
-|               BenchBaselineU16 | 3,187.574 ns |  8.8402 ns |  7.8366 ns |
-|               BenchBaselineU32 | 3,204.308 ns | 36.1097 ns | 33.7771 ns |
+| BenchStrengthReduceByteOneByte |     2.860 ns |  0.0044 ns |  0.0039 ns |
+|   BenchStrengthReduceU16OneU16 |     3.833 ns |  0.0208 ns |  0.0194 ns |
+|            BenchBaselineOneU64 |     5.291 ns |  0.0099 ns |  0.0088 ns |
+|            BenchBaselineOneU16 |     5.294 ns |  0.0300 ns |  0.0266 ns |
+|           BenchBaselineOneByte |     5.297 ns |  0.0063 ns |  0.0059 ns |
+|            BenchBaselineOneU32 |     5.302 ns |  0.0729 ns |  0.0682 ns |
+|   BenchStrengthReduceU32OneU32 |     5.824 ns |  0.0607 ns |  0.0568 ns |
+|   BenchStrengthReduceU64OneU64 |    64.970 ns |  1.2642 ns |  1.0557 ns |
+|        BenchStrengthReduceByte |   164.748 ns |  1.1126 ns |  1.0408 ns |
+|         BenchStrengthReduceU16 |   221.468 ns |  4.4146 ns |  9.1169 ns |
+|         BenchStrengthReduceU32 |   248.601 ns |  3.8517 ns |  3.4144 ns |
+|         BenchStrengthReduceU64 | 1,775.256 ns | 20.8042 ns | 19.4603 ns |
+|              BenchBaselineByte | 3,152.957 ns | 20.2562 ns | 18.9477 ns |
+|               BenchBaselineU16 | 3,195.399 ns |  4.2095 ns |  3.7316 ns |
+|               BenchBaselineU64 | 3,196.124 ns |  2.2190 ns |  2.0757 ns |
+|               BenchBaselineU32 | 3,202.035 ns |  4.4703 ns |  3.9628 ns |
