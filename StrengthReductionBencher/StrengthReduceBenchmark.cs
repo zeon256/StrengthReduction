@@ -49,7 +49,7 @@ public class StrengthReduceBenchmark
     {
         foreach (var divisor in _divisorsBytes)
         {
-            var reduced = new StrengthReduceByte(divisor);
+            var reduced = new StrengthReduceU8(divisor);
             foreach (var numerator in _numeratorsBytes)
             {
                 var reducedDiv = numerator / reduced;
@@ -143,7 +143,7 @@ public class StrengthReduceBenchmark
     [Benchmark]
     public void BenchStrengthReduceByteOneByte()
     {
-        var reduced = new StrengthReduceByte(_divisorsBytes[20]);
+        var reduced = new StrengthReduceU8(_divisorsBytes[20]);
         var reducedDiv = _numeratorsBytes[20] / reduced;
         var reducedRem = _numeratorsBytes[20] % reduced;
     }

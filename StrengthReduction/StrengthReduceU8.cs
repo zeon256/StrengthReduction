@@ -3,13 +3,13 @@ using System.Runtime.CompilerServices;
 
 namespace StrengthReduction;
 
-public readonly struct StrengthReduceByte
+public readonly struct StrengthReduceU8
 {
     private readonly byte _divisor;
     private readonly ushort _multiplier;
 
     [MethodImpl(MethodImplOptions.AggressiveInlining)]
-    public StrengthReduceByte(byte divisor)
+    public StrengthReduceU8(byte divisor)
     {
         // check if powers of 2
         if ((divisor & (divisor - 1)) == 0)
@@ -26,7 +26,7 @@ public readonly struct StrengthReduceByte
     }
 
     [MethodImpl(MethodImplOptions.AggressiveInlining)]
-    public static byte operator /(byte a, StrengthReduceByte rhs)
+    public static byte operator /(byte a, StrengthReduceU8 rhs)
     {
         ushort numerator = a;
         if (rhs._multiplier == 0) return (byte)(ushort)(numerator >> BitOperations.TrailingZeroCount(rhs._divisor));
@@ -36,7 +36,7 @@ public readonly struct StrengthReduceByte
     }
 
     [MethodImpl(MethodImplOptions.AggressiveInlining)]
-    public static byte operator %(byte a, StrengthReduceByte rhs)
+    public static byte operator %(byte a, StrengthReduceU8 rhs)
     {
         if (rhs._multiplier == 0) return (byte)(a & (rhs._divisor - 1));
 
@@ -47,7 +47,7 @@ public readonly struct StrengthReduceByte
     }
 
     [MethodImpl(MethodImplOptions.AggressiveInlining)]
-    public static (byte, byte) DivRem(byte numerator, StrengthReduceByte denom)
+    public static (byte, byte) DivRem(byte numerator, StrengthReduceU8 denom)
     {
         return (numerator / denom, numerator % denom);
     }

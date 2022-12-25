@@ -7,6 +7,41 @@ This library implements integer division and modulo via "[arithmetic strength re
 ## Why?
 Modern processors can do multiplication and shifts much faster than division, and "arithmetic strength reduction" is an algorithm to transform divisions into multiplications and shifts. Compilers already perform this optimization for divisors that are known at compile time; this library enables this optimization for divisors that are only known at runtime. [From strength_reduce README](https://github.com/ejmahler/strength_reduce)
 
+## Available types
+- `StrengthReduceU8`
+- `StrengthReduceU16`
+- `StrengthReduceU32`
+- `StrengthReduceU64`
+
+
+## Example usage
+> Works the best when there is repeated division of the same divisor
+```csharp
+public void TestUShort()
+    {
+        const ushort max = ushort.MaxValue;
+        ushort[] divisors = { 1, 2, 3, 4, 5, 6, 7, 8, 9, 10, 11, 12, 13, 14, 15, 16, 17, 18, 19, 20, max - 1, max };
+        ushort[] numerators = { 0, 1, 2, 3, 4, 5, 6, 7, 8, 9, 10, 11, 12, 13, 14, 15, 16, 17, 18, 19, 20 };
+        foreach (var divisor in divisors)
+        {
+            var reduced = new StrengthReduceU16(divisor);
+            foreach (var numerator in numerators)
+            {
+                Console.WriteLine($"Testing {numerator} / {divisor}");
+                var expectedDiv = (ushort)(numerator / divisor);
+                var expectedRem = (ushort)(numerator % divisor);
+                var reducedDiv = numerator / reduced;
+                var reducedRem = numerator % reduced;
+                var (reducedCombinedDiv, reducedCombinedRem) = StrengthReduceU16.DivRem(numerator, reduced);
+                Assert.AreEqual(expectedDiv, reducedDiv);
+                Assert.AreEqual(expectedRem, reducedRem);
+                Assert.AreEqual(expectedDiv, reducedCombinedDiv);
+                Assert.AreEqual(expectedRem, reducedCombinedRem);
+            }
+        }
+    }
+```
+
 ## Benchmarks
 |                         Method |         Mean |      Error |     StdDev |
 |------------------------------- |-------------:|-----------:|-----------:|
