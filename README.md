@@ -4,6 +4,9 @@
 ## Overview
 This library implements integer division and modulo via "[arithmetic strength reduction](https://en.wikipedia.org/wiki/Strength_reduction)".
 
+## Why?
+Modern processors can do multiplication and shifts much faster than division, and "arithmetic strength reduction" is an algorithm to transform divisions into multiplications and shifts. Compilers already perform this optimization for divisors that are known at compile time; this library enables this optimization for divisors that are only known at runtime. [From strength_reduce README](https://github.com/ejmahler/strength_reduce)
+
 ## Benchmarks
 |                         Method |         Mean |      Error |     StdDev |
 |------------------------------- |-------------:|-----------:|-----------:|
