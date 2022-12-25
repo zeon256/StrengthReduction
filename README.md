@@ -45,6 +45,7 @@ Modern processors can do multiplication and shifts much faster than division, an
 
 ## Benchmarks
 > Benchmark ran with BenchmarkDotNet
+
 |                         Method |         Mean |      Error |     StdDev |
 |------------------------------- |-------------:|-----------:|-----------:|
 | BenchStrengthReduceByteOneByte |     2.860 ns |  0.0044 ns |  0.0039 ns |
