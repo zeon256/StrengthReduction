@@ -17,30 +17,30 @@ Modern processors can do multiplication and shifts much faster than division, an
 ## Example usage
 > Works the best when there is repeated division of the same divisor. For more example see `StrengthReductionTest` folder
 ```csharp
-    [Test]
-    public void TestByte()
+[Test]
+public void TestByte()
+{
+    const byte max = byte.MaxValue;
+    byte[] divisors = { 1, 2, 3, 4, 5, 6, 7, 8, 9, 10, 11, 12, 13, 14, 15, 16, 17, 18, 19, 20, max - 1, max };
+    byte[] numerators = { 0, 1, 2, 3, 4, 5, 6, 7, 8, 9, 10, 11, 12, 13, 14, 15, 16, 17, 18, 19, 20 };
+    foreach (var divisor in divisors)
     {
-        const byte max = byte.MaxValue;
-        byte[] divisors = { 1, 2, 3, 4, 5, 6, 7, 8, 9, 10, 11, 12, 13, 14, 15, 16, 17, 18, 19, 20, max - 1, max };
-        byte[] numerators = { 0, 1, 2, 3, 4, 5, 6, 7, 8, 9, 10, 11, 12, 13, 14, 15, 16, 17, 18, 19, 20 };
-        foreach (var divisor in divisors)
+        var reduced = new StrengthReduceU8(divisor);
+        foreach (var numerator in numerators)
         {
-            var reduced = new StrengthReduceU8(divisor);
-            foreach (var numerator in numerators)
-            {
-                Console.WriteLine($"Testing {numerator} / {divisor}");
-                var expectedDiv = (byte)(numerator / divisor);
-                var expectedRem = (byte)(numerator % divisor);
-                var reducedDiv = numerator / reduced;
-                var reducedRem = numerator % reduced;
-                var (reducedCombinedDiv, reducedCombinedRem) = StrengthReduceU8.DivRem(numerator, reduced);
-                Assert.AreEqual(expectedDiv, reducedDiv);
-                Assert.AreEqual(expectedRem, reducedRem);
-                Assert.AreEqual(expectedDiv, reducedCombinedDiv);
-                Assert.AreEqual(expectedRem, reducedCombinedRem);
-            }
+            Console.WriteLine($"Testing {numerator} / {divisor}");
+            var expectedDiv = (byte)(numerator / divisor);
+            var expectedRem = (byte)(numerator % divisor);
+            var reducedDiv = numerator / reduced;
+            var reducedRem = numerator % reduced;
+            var (reducedCombinedDiv, reducedCombinedRem) = StrengthReduceU8.DivRem(numerator, reduced);
+            Assert.AreEqual(expectedDiv, reducedDiv);
+            Assert.AreEqual(expectedRem, reducedRem);
+            Assert.AreEqual(expectedDiv, reducedCombinedDiv);
+            Assert.AreEqual(expectedRem, reducedCombinedRem);
         }
     }
+}
 ```
 
 ## Benchmarks
