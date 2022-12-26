@@ -82,7 +82,7 @@ public class StrengthReduceBenchmark
             }
         }
     }
-    
+
     [Benchmark]
     public void BenchBaselineU32()
     {
@@ -107,7 +107,7 @@ public class StrengthReduceBenchmark
             }
         }
     }
-    
+
     [Benchmark]
     public void BenchBaselineU64()
     {
@@ -147,7 +147,7 @@ public class StrengthReduceBenchmark
         var reducedDiv = _numeratorsBytes[20] / reduced;
         var reducedRem = _numeratorsBytes[20] % reduced;
     }
-    
+
     [Benchmark]
     public void BenchBaselineOneU16()
     {
@@ -162,7 +162,7 @@ public class StrengthReduceBenchmark
         var reducedDiv = _numeratorsU16[20] / reduced;
         var reducedRem = _numeratorsU16[20] % reduced;
     }
-    
+
     [Benchmark]
     public void BenchBaselineOneU32()
     {
@@ -177,7 +177,7 @@ public class StrengthReduceBenchmark
         var reducedDiv = _numeratorsU32[20] / reduced;
         var reducedRem = _numeratorsU32[20] % reduced;
     }
-    
+
     [Benchmark]
     public void BenchBaselineOneU64()
     {

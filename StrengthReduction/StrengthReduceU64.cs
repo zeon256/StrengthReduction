@@ -3,7 +3,7 @@ using System.Runtime.CompilerServices;
 
 namespace StrengthReduction;
 
-public readonly struct StrengthReduceU64
+public readonly struct StrengthReduceU64 : IFormattable, IComparable<StrengthReduceU64>, IEquatable<StrengthReduceU64>
 {
     private readonly ulong _divisor;
     private readonly UInt128 _multiplier;
@@ -23,6 +23,24 @@ public readonly struct StrengthReduceU64
         }
 
         _divisor = divisor;
+    }
+
+    [MethodImpl(MethodImplOptions.AggressiveInlining)]
+    public static implicit operator StrengthReduceU64(ulong divisor)
+    {
+        return new StrengthReduceU64(divisor);
+    }
+
+    [MethodImpl(MethodImplOptions.AggressiveInlining)]
+    public static bool operator ==(StrengthReduceU64 a, StrengthReduceU64 b)
+    {
+        return a._divisor == b._divisor;
+    }
+
+    [MethodImpl(MethodImplOptions.AggressiveInlining)]
+    public static bool operator !=(StrengthReduceU64 a, StrengthReduceU64 b)
+    {
+        return !(a == b);
     }
 
     [MethodImpl(MethodImplOptions.AggressiveInlining)]
@@ -54,5 +72,23 @@ public readonly struct StrengthReduceU64
     public ulong Get()
     {
         return _divisor;
+    }
+
+    [MethodImpl(MethodImplOptions.AggressiveInlining)]
+    public string ToString(string? format, IFormatProvider? formatProvider)
+    {
+        return _divisor.ToString();
+    }
+
+    [MethodImpl(MethodImplOptions.AggressiveInlining)]
+    public int CompareTo(StrengthReduceU64 other)
+    {
+        return _divisor.CompareTo(other._divisor);
+    }
+
+    [MethodImpl(MethodImplOptions.AggressiveInlining)]
+    public bool Equals(StrengthReduceU64 other)
+    {
+        return _divisor.Equals(other._divisor);
     }
 }

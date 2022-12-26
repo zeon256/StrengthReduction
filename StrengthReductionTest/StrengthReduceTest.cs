@@ -1,6 +1,6 @@
 ﻿using StrengthReduction;
 
-namespace StrengthReductionBencher;
+namespace StrengthReductionTest;
 
 public class StrengthReduceTest
 {
@@ -12,6 +12,24 @@ public class StrengthReduceTest
     }
 
     [Test]
+    public void TestEq()
+    {
+        StrengthReduceU8 a = 3;
+        StrengthReduceU8 b = 3;
+        Console.WriteLine(a);
+        Assert.AreEqual(a, b);
+        StrengthReduceU16 c = 3;
+        StrengthReduceU16 d = 3;
+        Assert.AreEqual(c, d);
+        StrengthReduceU32 e = 3;
+        StrengthReduceU32 f = 3;
+        Assert.AreEqual(e, f);
+        StrengthReduceU64 g = 3;
+        StrengthReduceU64 h = 3;
+        Assert.AreEqual(g, h);
+    }
+
+    [Test]
     public void TestByte()
     {
         const byte max = byte.MaxValue;
@@ -19,7 +37,7 @@ public class StrengthReduceTest
         byte[] numerators = { 0, 1, 2, 3, 4, 5, 6, 7, 8, 9, 10, 11, 12, 13, 14, 15, 16, 17, 18, 19, 20 };
         foreach (var divisor in divisors)
         {
-            var reduced = new StrengthReduceU8(divisor);
+            StrengthReduceU8 reduced = divisor;
             foreach (var numerator in numerators)
             {
                 Console.WriteLine($"Testing {numerator} / {divisor}");
@@ -44,7 +62,7 @@ public class StrengthReduceTest
         ushort[] numerators = { 0, 1, 2, 3, 4, 5, 6, 7, 8, 9, 10, 11, 12, 13, 14, 15, 16, 17, 18, 19, 20 };
         foreach (var divisor in divisors)
         {
-            var reduced = new StrengthReduceU16(divisor);
+            StrengthReduceU16 reduced = divisor;
             foreach (var numerator in numerators)
             {
                 Console.WriteLine($"Testing {numerator} / {divisor}");
@@ -69,7 +87,7 @@ public class StrengthReduceTest
         uint[] numerators = { 0, 1, 2, 3, 4, 5, 6, 7, 8, 9, 10, 11, 12, 13, 14, 15, 16, 17, 18, 19, 20 };
         foreach (var divisor in divisors)
         {
-            var reduced = new StrengthReduceU32(divisor);
+            StrengthReduceU32 reduced = divisor;
             foreach (var numerator in numerators)
             {
                 Console.WriteLine($"Testing {numerator} / {divisor}");
@@ -94,7 +112,7 @@ public class StrengthReduceTest
         ulong[] numerators = { 0, 1, 2, 3, 4, 5, 6, 7, 8, 9, 10, 11, 12, 13, 14, 15, 16, 17, 18, 19, 20 };
         foreach (var divisor in divisors)
         {
-            var reduced = new StrengthReduceU64(divisor);
+            StrengthReduceU64 reduced = divisor;
             foreach (var numerator in numerators)
             {
                 Console.WriteLine($"Testing {numerator} / {divisor}");

@@ -3,7 +3,7 @@ using System.Runtime.CompilerServices;
 
 namespace StrengthReduction;
 
-public readonly struct StrengthReduceU8
+public readonly struct StrengthReduceU8 : IFormattable, IComparable<StrengthReduceU8>, IEquatable<StrengthReduceU8>
 {
     private readonly byte _divisor;
     private readonly ushort _multiplier;
@@ -23,6 +23,24 @@ public readonly struct StrengthReduceU8
         }
 
         _divisor = divisor;
+    }
+
+    [MethodImpl(MethodImplOptions.AggressiveInlining)]
+    public static implicit operator StrengthReduceU8(byte divisor)
+    {
+        return new StrengthReduceU8(divisor);
+    }
+
+    [MethodImpl(MethodImplOptions.AggressiveInlining)]
+    public static bool operator ==(StrengthReduceU8 a, StrengthReduceU8 b)
+    {
+        return a._divisor == b._divisor;
+    }
+
+    [MethodImpl(MethodImplOptions.AggressiveInlining)]
+    public static bool operator !=(StrengthReduceU8 a, StrengthReduceU8 b)
+    {
+        return !(a == b);
     }
 
     [MethodImpl(MethodImplOptions.AggressiveInlining)]
@@ -56,5 +74,23 @@ public readonly struct StrengthReduceU8
     public byte Get()
     {
         return _divisor;
+    }
+
+    [MethodImpl(MethodImplOptions.AggressiveInlining)]
+    public string ToString(string? format, IFormatProvider? formatProvider)
+    {
+        return _divisor.ToString();
+    }
+
+    [MethodImpl(MethodImplOptions.AggressiveInlining)]
+    public int CompareTo(StrengthReduceU8 other)
+    {
+        return _divisor.CompareTo(other._divisor);
+    }
+
+    [MethodImpl(MethodImplOptions.AggressiveInlining)]
+    public bool Equals(StrengthReduceU8 other)
+    {
+        return _divisor.Equals(other._divisor);
     }
 }
